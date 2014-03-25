@@ -4,8 +4,12 @@
  *  Created on: Mar 19, 2014
  *      Author: shev
  */
+#include <stdio.h>
+#include <stdlib.h>
+#include "stdio.h"
 #include "net_client.h"
 #include "net_server.h"
+#include <sys/epoll.h>
 
 void* _cb_svr_connect(void *cxt, const char* host, int port) {
 	printf("server: %s:%d connected.\n", host, port);

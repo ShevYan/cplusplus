@@ -1,0 +1,11 @@
+eclipse.preferences.version=1
+environment/project/cdt.managedbuild.config.gnu.exe.debug.1484382824/PATH/delimiter=\:
+environment/project/cdt.managedbuild.config.gnu.exe.debug.1484382824/PATH/operation=replace
+environment/project/cdt.managedbuild.config.gnu.exe.debug.1484382824/PATH/value=/bin\:/usr/lib/lightdm/lightdm\:/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/usr/games
+environment/project/cdt.managedbuild.config.gnu.exe.debug.1484382824/append=true
+environment/project/cdt.managedbuild.config.gnu.exe.debug.1484382824/appendContributed=false
+environment/project/cdt.managedbuild.config.gnu.exe.release.300115726/PATH/delimiter=\:
+environment/project/cdt.managedbuild.config.gnu.exe.release.300115726/PATH/operation=append
+environment/project/cdt.managedbuild.config.gnu.exe.release.300115726/PATH/value=/bin\:/usr/lib/lightdm/lightdm\:/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/usr/games
+environment/project/cdt.managedbuild.config.gnu.exe.release.300115726/append=true
+environment/project/cdt.managedbuild.config.gnu.exe.release.300115726/appendContributed=true
