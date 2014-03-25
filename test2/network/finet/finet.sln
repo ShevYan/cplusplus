@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "finet", "finet.vcproj", "{DA258FD0-621F-4ADA-8972-198A55A02CF5}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "testscm", "..\..\ficstest\testwin32\testscm\testscm.vcproj", "{38B2137B-789E-4ED5-805A-70B101E38D25}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DA258FD0-621F-4ADA-8972-198A55A02CF5}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DA258FD0-621F-4ADA-8972-198A55A02CF5}.Debug|Win32.Build.0 = Debug|Win32
+		{DA258FD0-621F-4ADA-8972-198A55A02CF5}.Release|Win32.ActiveCfg = Release|Win32
+		{DA258FD0-621F-4ADA-8972-198A55A02CF5}.Release|Win32.Build.0 = Release|Win32
+		{38B2137B-789E-4ED5-805A-70B101E38D25}.Debug|Win32.ActiveCfg = Debug|Win32
+		{38B2137B-789E-4ED5-805A-70B101E38D25}.Debug|Win32.Build.0 = Debug|Win32
+		{38B2137B-789E-4ED5-805A-70B101E38D25}.Release|Win32.ActiveCfg = Release|Win32
+		{38B2137B-789E-4ED5-805A-70B101E38D25}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

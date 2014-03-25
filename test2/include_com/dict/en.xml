@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<FiDict>
+        <error>
+                <suc>successful!</suc>
+                <MBtree_FileExist>file exist</MBtree_FileExist>
+                <MDisk_WriteProtect>disk write protect</MDisk_WriteProtect>
+        </error>
+</FiDict>
+

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FiLogCfg>
+	<AsyncWriteLog>0</AsyncWriteLog>
+	<FileLog>0</FileLog>
+	<ScreenLog>1</ScreenLog>
+	<UserLog>0</UserLog>
+	<DebugLog>0</DebugLog>
+</FiLogCfg>

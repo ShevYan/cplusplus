@@ -1,0 +1,327 @@
+<!DOCTYPE Project SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpj.dtd">
+<Project
+	Version="10.0"
+	VendorName="SlickEdit"
+	TemplateName="GNU C/C++"
+	WorkingDir="."
+	BuildSystem="vsbuild">
+	<Config
+		Name="Debug"
+		Type="gnuc"
+		DebugCallbackName="gdb"
+		Version="1"
+		OutputFile="%bdtcpio"
+		CompilerConfigName="Latest Version">
+		<Menu>
+			<Target
+				Name="Compile"
+				MenuCaption="&amp;Compile"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				OutputExts="*.o"
+				SaveOption="SaveCurrent"
+				RunFromDir="%rw">
+				<Exec CmdLine='g++ -c %xup  %defd -g -o "%bd%n%oe" %i "%f"'/>
+			</Target>
+			<Target
+				Name="Link"
+				MenuCaption="&amp;Link"
+				ShowOnMenu="Never"
+				Dialog="_gnuc_options_form Link"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveCurrent"
+				RunFromDir="%rw">
+				<Exec CmdLine='g++ %xup -g -o "%o" %f %libs'/>
+			</Target>
+			<Target
+				Name="Build"
+				MenuCaption="&amp;Build"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%(VSLICKBIN1)vsbuild" "%w" "%r" -t build'/>
+			</Target>
+			<Target
+				Name="Rebuild"
+				MenuCaption="&amp;Rebuild"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%(VSLICKBIN1)vsbuild" "%w" "%r" -t rebuild'/>
+			</Target>
+			<Target
+				Name="Debug"
+				MenuCaption="&amp;Debug"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveNone"
+				RunFromDir="%rw">
+				<Exec CmdLine='vsdebugio -prog "%o"'/>
+			</Target>
+			<Target
+				Name="Execute"
+				MenuCaption="E&amp;xecute"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%o"'/>
+			</Target>
+			<Target
+				Name="dash"
+				MenuCaption="-"
+				Deletable="0">
+				<Exec/>
+			</Target>
+			<Target
+				Name="GNU C Options"
+				MenuCaption="GNU C &amp;Options..."
+				ShowOnMenu="HideIfNoCmdLine"
+				Deletable="0"
+				SaveOption="SaveNone">
+				<Exec
+					CmdLine="gnucoptions"
+					Type="Slick-C"/>
+			</Target>
+		</Menu>
+		<List Name="GNUC Options">
+			<Item
+				Name="LinkerOutputType"
+				Value="Executable"/>
+		</List>
+	</Config>
+	<Config
+		Name="Release"
+		Type="gnuc"
+		DebugCallbackName="gdb"
+		Version="1"
+		OutputFile="%bdtcpio"
+		CompilerConfigName="Latest Version">
+		<Menu>
+			<Target
+				Name="Compile"
+				MenuCaption="&amp;Compile"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				OutputExts="*.o"
+				SaveOption="SaveCurrent"
+				RunFromDir="%rw">
+				<Exec CmdLine='g++ -c %xup %defd -o "%bd%n%oe" %i "%f"'/>
+			</Target>
+			<Target
+				Name="Link"
+				MenuCaption="&amp;Link"
+				ShowOnMenu="Never"
+				Dialog="_gnuc_options_form Link"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveCurrent"
+				RunFromDir="%rw">
+				<Exec CmdLine='g++ %xup -o "%o" %f %libs'/>
+			</Target>
+			<Target
+				Name="Build"
+				MenuCaption="&amp;Build"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%(VSLICKBIN1)vsbuild" "%w" "%r" -t build'/>
+			</Target>
+			<Target
+				Name="Rebuild"
+				MenuCaption="&amp;Rebuild"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%(VSLICKBIN1)vsbuild" "%w" "%r" -t rebuild'/>
+			</Target>
+			<Target
+				Name="Debug"
+				MenuCaption="&amp;Debug"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveNone"
+				RunFromDir="%rw">
+				<Exec CmdLine='vsdebugio -prog "%o"'/>
+			</Target>
+			<Target
+				Name="Execute"
+				MenuCaption="E&amp;xecute"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%o"'/>
+			</Target>
+			<Target
+				Name="dash"
+				MenuCaption="-"
+				Deletable="0">
+				<Exec/>
+			</Target>
+			<Target
+				Name="GNU C Options"
+				MenuCaption="GNU C &amp;Options..."
+				ShowOnMenu="HideIfNoCmdLine"
+				Deletable="0"
+				SaveOption="SaveNone">
+				<Exec
+					CmdLine="gnucoptions"
+					Type="Slick-C"/>
+			</Target>
+		</Menu>
+		<List Name="GNUC Options">
+			<Item
+				Name="LinkerOutputType"
+				Value="Executable"/>
+		</List>
+	</Config>
+	<CustomFolders>
+		<Folder
+			Name="Source Files"
+			Filters="*.c;*.C;*.cc;*.cpp;*.cp;*.cxx;*.c++;*.prg;*.pas;*.dpr;*.asm;*.s;*.bas;*.java;*.cs;*.sc;*.e;*.cob;*.html;*.rc;*.tcl;*.py;*.pl;*.d">
+		</Folder>
+		<Folder
+			Name="Header Files"
+			Filters="*.h;*.H;*.hh;*.hpp;*.hxx;*.inc;*.sh;*.cpy;*.if">
+		</Folder>
+		<Folder
+			Name="Resource Files"
+			Filters="*.ico;*.cur;*.dlg"/>
+		<Folder
+			Name="Bitmaps"
+			Filters="*.bmp"/>
+		<Folder
+			Name="Other Files"
+			Filters=""/>
+	</CustomFolders>
+	<Files AutoFolders="DirectoryView">
+		<Folder Name="fitest">
+			<Folder Name="testnet">
+				<F N="fitest/testnet/testtcpio.cpp"/>
+			</Folder>
+		</Folder>
+		<Folder Name="include_com">
+			<F N="include_com/BaseType.h"/>
+			<F N="include_com/bitmap.cpp"/>
+			<F N="include_com/bitmap.h"/>
+			<F N="include_com/c_socket.cpp"/>
+			<F N="include_com/c_socket.h"/>
+			<F N="include_com/c_wait_for.cpp"/>
+			<F N="include_com/c_wait_for.h"/>
+			<F N="include_com/cfgcmd.h"/>
+			<F N="include_com/COMM_MSG_DEF.h"/>
+			<F N="include_com/crc32c.h"/>
+			<F N="include_com/dblinklist.h"/>
+			<F N="include_com/difsdiskcmd.h"/>
+			<F N="include_com/difsdiskext.h"/>
+			<F N="include_com/difstypes.h"/>
+			<F N="include_com/DiMBBase.h"/>
+			<F N="include_com/diskDataS.h"/>
+			<F N="include_com/error.h"/>
+			<F N="include_com/error_def.cpp"/>
+			<F N="include_com/error_def.h"/>
+			<F N="include_com/FiContext.cpp"/>
+			<F N="include_com/FiContext.h"/>
+			<F N="include_com/FiDict.cpp"/>
+			<F N="include_com/FiDict.h"/>
+			<F N="include_com/FiErr.cpp"/>
+			<F N="include_com/FiErr.h"/>
+			<F N="include_com/FiLog.cpp"/>
+			<F N="include_com/FiLog.h"/>
+			<F N="include_com/FiMcBase.h"/>
+			<F N="include_com/FiMemory.cpp"/>
+			<F N="include_com/FiMemory.h"/>
+			<F N="include_com/FiMsgThread.h"/>
+			<F N="include_com/FiThreads.cpp"/>
+			<F N="include_com/FiThreads.h"/>
+			<F N="include_com/fitimer.cpp"/>
+			<F N="include_com/fitimer.h"/>
+			<F N="include_com/FiUtility.h"/>
+			<F N="include_com/GetIP.cpp"/>
+			<F N="include_com/GetIP.h"/>
+			<F N="include_com/kernel_user.h"/>
+			<F N="include_com/layout.h"/>
+			<F N="include_com/libcfg.h"/>
+			<F N="include_com/Markup.cpp"/>
+			<F N="include_com/Markup.h"/>
+			<F N="include_com/md5.c"/>
+			<F N="include_com/md5.h"/>
+			<F N="include_com/metacmdbase.h"/>
+			<F N="include_com/metacmddifs.h"/>
+			<F N="include_com/netdefine.h"/>
+			<F N="include_com/os.h"/>
+			<F N="include_com/OSEvent.cpp"/>
+			<F N="include_com/OSEvent.h"/>
+			<F N="include_com/OSMutex.cpp"/>
+			<F N="include_com/OSMutex.h"/>
+			<F N="include_com/OSSemaphore.cpp"/>
+			<F N="include_com/OSSemaphore.h"/>
+			<F N="include_com/OSThread.cpp"/>
+			<F N="include_com/OSThread.h"/>
+			<F N="include_com/OSUtility.cpp"/>
+			<F N="include_com/OSUtility.h"/>
+			<F N="include_com/OSWaitObject.h"/>
+			<F N="include_com/perf.cpp"/>
+			<F N="include_com/perf.h"/>
+			<F N="include_com/pipetransfer.cpp"/>
+			<F N="include_com/pipetransfer.h"/>
+			<F N="include_com/portdef.h"/>
+			<F N="include_com/sctp_crc32.cpp"/>
+			<F N="include_com/ShareLock.cpp"/>
+			<F N="include_com/ShareLock.h"/>
+			<F N="include_com/StdString.h"/>
+			<F N="include_com/sv_ipc.h"/>
+			<F N="include_com/sv_sem.cpp"/>
+			<F N="include_com/sv_shm.cpp"/>
+			<F N="include_com/tcpsocket.cpp"/>
+			<F N="include_com/tcpsocket.h"/>
+			<F N="include_com/udpsocket.cpp"/>
+			<F N="include_com/udpsocket.h"/>
+			<F N="include_com/W2KWrapBase.h"/>
+			<F N="include_com/win_error.h"/>
+			<F N="include_com/yd_sem.h"/>
+		</Folder>
+		<Folder Name="network">
+			<F N="network/channel.cpp"/>
+			<F N="network/channel.h"/>
+			<F N="network/module_reg.cpp"/>
+			<F N="network/module_reg.h"/>
+			<F N="network/msgsite.cpp"/>
+			<F N="network/msgsite.h"/>
+			<F N="network/netconfig.cpp"/>
+			<F N="network/netconfig.h"/>
+			<F N="network/netmsg.cpp"/>
+			<F N="network/netmsg.h"/>
+			<F N="network/socketpool.cpp"/>
+			<F N="network/socketpool.h"/>
+			<F N="network/tcpclient.cpp"/>
+			<F N="network/tcpclient.h"/>
+			<F N="network/tcpio.cpp"/>
+			<F N="network/tcpio.h"/>
+			<F N="network/tcpserver.cpp"/>
+			<F N="network/tcpserver.h"/>
+			<F N="network/udpsocketthread.cpp"/>
+			<F N="network/udpsocketthread.h"/>
+		</Folder>
+	</Files>
+</Project>

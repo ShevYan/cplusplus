@@ -1,0 +1,16 @@
+[Global]
+CurrentProject=Linux_ficsnet.vpj
+[ProjectDates]
+Linux_ficsnet.vpj=20130515062515000
+[TreeExpansion2]
++@ Linux_ficsnet.vpj
+scroll:0
+[State]
+SCREEN: 1676 943 271 90 1200 788 0 0 N 0 0 0 0 786 428 0
+CWD: ../network
+TBCLASS: 0 0
+DEBUG: 0 0 0 0 3 0 gdb
+printf
+strcpy
+std::*
+DEBUG2: 0

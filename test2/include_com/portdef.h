@@ -1,0 +1,8 @@
+#ifndef __PORTDEF_H__
+#define __PORTDEF_H__
+
+#define FIMAS_UDPBASE_PORT  (5621)
+#define FIMAS_UDPPORT_RANGE (40)
+#define FIMAS_TCPBASE_PORT  (20419)
+#define FIMAS_TCPPORT_RANGE (40)
+#endif

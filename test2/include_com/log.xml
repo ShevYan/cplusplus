@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<FiLogCfg>
+
+     <AsyncWriteLog>0</AsyncWriteLog>
+
+     <FileLog>0</FileLog>
+
+     <ScreenLog>1</ScreenLog>
+
+     <UserLog>1</UserLog>
+
+     <DebugLog>1</DebugLog>
+
+</FiLogCfg>

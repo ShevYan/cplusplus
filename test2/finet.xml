@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<finet>
+	<iocpnum>16</iocpnum>
+	<local>
+		<host>
+			<ip>10.200.103.89</ip>
+		</host>
+	</local>
+
+	<remote>
+		<host>
+			<ip>10.200.103.89</ip>
+		</host>
+	</remote>
+</finet>

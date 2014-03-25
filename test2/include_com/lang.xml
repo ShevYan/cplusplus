@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<FiDict>
+        <error>
+                <suc>成功</suc>
+                <MBtree_FileExist>文件已经存在</MBtree_FileExist>
+                <MDisk_WriteProtect>磁盘写保护</MDisk_WriteProtect>
+        </error>
+</FiDict>

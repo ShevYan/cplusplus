@@ -1,0 +1,56 @@
+[Global]
+CurrentProject=tcpio.vpj
+[ProjectDates]
+tcpio.vpj=20130711070100000
+[ActiveConfig]
+tcpio.vpj=Debug
+[TreeExpansion2]
+-@ tcpio.vpj
+  - fitest
+    - testnet
+  + include_com
+  - network
+scroll:0
+[State]
+SCREEN: 1215 1002 0 0 1215 955 0 0 N 0 0 0 0 897 793 0
+CWD: fitest/testnet
+BUFFER: BN="fitest/testnet/testtcpio.cpp"
+BI: MA=1 74 1  TABS=1 5  WWS=1 IWT=1 ST=0 IN=2 BW=0 US=32000 RO=0 SE=1 SN=0 BIN=0 MN=C/C++	HM=0 MF=608 TL=0 MLL=0 ASE=0 LNL=1 LCF=0 CAPS=0 E=0 ESBU2=1 CL="" SC="" SCE= SCU=
+VIEW: LN=.512 CL=60 LE=0 CX=61 CY=23 WI=5 BI=4 HT=0 HN=0 HF=0 HC=4
+BUFFER: BN="network/tcpclient.h"
+BI: MA=1 74 1  TABS=1 5  WWS=1 IWT=1 ST=0 IN=2 BW=0 US=32000 RO=0 SE=1 SN=0 BIN=0 MN=C/C++	HM=0 MF=736 TL=0 MLL=0 ASE=0 LNL=1 LCF=0 CAPS=0 E=0 ESBU2=1 CL="" SC="" SCE= SCU=
+VIEW: LN=.121 CL=25 LE=0 CX=26 CY=8 WI=5 BI=24 HT=0 HN=0 HF=0 HC=4
+BUFFER: BN="network/tcpclient.cpp"
+BI: MA=1 74 1  TABS=1 5  WWS=1 IWT=1 ST=0 IN=2 BW=0 US=32000 RO=0 SE=1 SN=0 BIN=0 MN=C/C++	HM=0 MF=608 TL=0 MLL=0 ASE=0 LNL=1 LCF=0 CAPS=0 E=0 ESBU2=1 CL="" SC="" SCE= SCU=
+VIEW: LN=.740 CL=38 LE=0 CX=39 CY=30 WI=5 BI=23 HT=0 HN=0 HF=0 HC=4
+BUFFER: BN="network/tcpserver.cpp"
+BI: MA=1 74 1  TABS=1 5  WWS=1 IWT=1 ST=0 IN=2 BW=0 US=32000 RO=0 SE=1 SN=0 BIN=0 MN=C/C++	HM=0 MF=608 TL=0 MLL=0 ASE=0 LNL=1 LCF=0 CAPS=0 E=0 ESBU2=1 CL="" SC="" SCE= SCU=
+VIEW: LN=.60845 CL=26 LE=0 CX=27 CY=18 WI=5 BI=20 HT=0 HN=0 HF=0 HC=4
+WINDOW: 180 96 695 555 0 0 N  WF=0 WT=5 ",,,"
+BUFFER: BN="network/tcpserver.cpp"
+VIEW: LN=.60845 CL=26 LE=0 CX=27 CY=18 WI=216 BI=20 HT=0 HN=0 HF=0 HC=4
+WINDOW: 90 216 695 555 0 0 N  WF=0 WT=1 ",,,"
+BUFFER: BN="fitest/testnet/testtcpio.cpp"
+VIEW: LN=.512 CL=60 LE=0 CX=60 CY=23 WI=355 BI=4 HT=0 HN=0 HF=0 HC=4
+WINDOW: 54 216 695 555 0 0 N  WF=0 WT=4 ",,,"
+BUFFER: BN="network/tcpclient.cpp"
+VIEW: LN=.740 CL=38 LE=0 CX=38 CY=30 WI=367 BI=23 HT=0 HN=0 HF=0 HC=4
+WINDOW: 36 192 695 555 0 0 M  WF=0 WT=2 ",,,"
+BUFFER: BN="network/tcpclient.h"
+VIEW: LN=.325 CL=2 LE=0 CX=2 CY=18 WI=360 BI=24 HT=0 HN=0 HF=0 HC=4
+FILEHIST: 9
+include_com/FiMsgThread.h
+include_com/FiUtility.h
+network/tcpserver.cpp
+network/tcpio.cpp
+include_com/tcpsocket.h
+fitest/testnet/testtcpio.cpp
+network/tcpio.h
+network/tcpclient.cpp
+network/tcpclient.h
+DEBUG: 0 0 0 0 3 0 gdb
+printf
+strcpy
+std::*
+DEBUG2: 0
+TBCLASS: 0 0

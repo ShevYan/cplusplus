@@ -1,0 +1,80 @@
+﻿<FPerf>
+    <Config>
+        <bmon>1</bmon>
+        <period>2</period>
+        <cycleFile>
+            <headsize>5</headsize>
+            <filesize>12</filesize>
+            <splitsize>6</splitsize>
+            <filename>fperf</filename>
+        </cycleFile>
+        <maxPerfEntry>100000</maxPerfEntry>
+        <ver>4</ver>
+        <perfItem>
+            <id>FiIops#read</id>
+            <id>FiIops#write</id>
+            <id>FiIops#meta</id>
+            <id>FiRespTime#read</id>
+        </perfItem>
+    </Config>
+
+    <PerfClass>
+        <FiIops>
+            <instance>client_ip</instance>
+            <op>sum</op>
+            <perfEntry>
+                <id>read</id>
+                <id>write</id>
+                <id>meta</id>
+            </perfEntry>
+        </FiIops>
+
+
+        <FiBand>
+            <instance>client_ip</instance>
+            <op>sum</op>
+            <perfEntry>
+                <id>read</id>
+                <id>write</id>
+            </perfEntry>
+        </FiBand>
+
+        <FiRespTime>
+            <instance>client_ip</instance>
+            <op>avg#max#min</op>
+            <perfEntry>
+                <id>read</id>
+                <id>write</id>
+                <id>create</id>
+                <id>setinfo</id>
+            </perfEntry>
+        </FiRespTime>
+
+        <DiskIops>
+            <instance>default</instance>
+            <op>sum</op>
+            <perfEntry>
+                <id>read</id>
+                <id>write</id>
+            </perfEntry>
+        </DiskIops>
+
+        <DiskBand>
+            <instance>default</instance>
+            <op>sum</op>
+            <perfEntry>
+                <id>read</id>
+                <id>write</id>
+            </perfEntry>
+        </DiskBand>
+
+        <DiskBand>
+            <instance>default</instance>
+            <op>avg</op>
+            <perfEntry>
+                <id>read</id>
+                <id>write</id>
+            </perfEntry>
+        </DiskBand>
+    </PerfClass>
+</FPerf>

@@ -1,0 +1,313 @@
+<!DOCTYPE Project SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpj.dtd">
+<Project
+	Version="10.0"
+	VendorName="SlickEdit"
+	WorkingDir="."
+	BuildSystem="automakefile"
+	BuildMakeFile="Makefile.mac">
+	<Config
+		Name="Debug"
+		Type="gnuc"
+		DebugCallbackName="gdb"
+		Version="1"
+		OutputFile="%bdlibcomutility.so"
+		CompilerConfigName="Latest Version"
+		Defines='"/DFI_MAC"'>
+		<Menu>
+			<Target
+				Name="Compile"
+				MenuCaption="&amp;Compile"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				OutputExts="*.o"
+				SaveOption="SaveCurrent"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec
+					CmdLine='g++ -c %xup %defd -O2 -g -fPIC %~other -o "%bd%n%oe" %i "%f"'
+					OtherOptions="-m32"/>
+			</Target>
+			<Target
+				Name="Link"
+				MenuCaption="&amp;Link"
+				ShowOnMenu="Never"
+				Dialog="_gnuc_options_form Link"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveCurrent"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec
+					CmdLine='g++ %xup -O2 -g -shared -fPIC %~other -o "%o" %objs'
+					OtherOptions="-m32"/>
+			</Target>
+			<Target
+				Name="Build"
+				MenuCaption="&amp;Build"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='gmake -f "Makefile.mac" CFG=%b'/>
+			</Target>
+			<Target
+				Name="Rebuild"
+				MenuCaption="&amp;Rebuild"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='gmake -f "Makefile.mac" rebuild CFG=%b'/>
+			</Target>
+			<Target
+				Name="Debug"
+				MenuCaption="&amp;Debug"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveNone"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='"%o" "%o"'/>
+			</Target>
+			<Target
+				Name="Execute"
+				MenuCaption="E&amp;xecute"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%o"'/>
+			</Target>
+			<Target
+				Name="dash"
+				MenuCaption="-"
+				Deletable="0">
+				<Exec/>
+			</Target>
+			<Target
+				Name="GNU C Options"
+				MenuCaption="GNU C &amp;Options..."
+				ShowOnMenu="HideIfNoCmdLine"
+				Deletable="0"
+				SaveOption="SaveNone">
+				<Exec
+					CmdLine="gnucoptions"
+					Type="Slick-C"/>
+			</Target>
+		</Menu>
+		<Includes/>
+		<Libs PreObjects="0">
+			<Lib File="-lpthread"/>
+			<Lib File="-liconv"/>
+			<Lib File="-lLog"/>
+			<Lib File="-L/usr/local/lib"/>
+		</Libs>
+		<PostBuildCommands>
+			<Exec CmdLine="cp ./Debug/libcomutility.so /usr/local/lib"/>
+		</PostBuildCommands>
+	</Config>
+	<Config
+		Name="Release"
+		Type="gnuc"
+		DebugCallbackName="gdb"
+		Version="1"
+		OutputFile="%bdlibcomutility.so"
+		CompilerConfigName="Latest Version"
+		Defines='"/DFI_MAC"'>
+		<Menu>
+			<Target
+				Name="Compile"
+				MenuCaption="&amp;Compile"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				OutputExts="*.o"
+				SaveOption="SaveCurrent"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec
+					CmdLine='g++ -c %xup %defd -O2 -fPIC %~other -o "%bd%n%oe" %i "%f"'
+					OtherOptions="-m32"/>
+			</Target>
+			<Target
+				Name="Link"
+				MenuCaption="&amp;Link"
+				ShowOnMenu="Never"
+				Dialog="_gnuc_options_form Link"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveCurrent"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec
+					CmdLine='g++ %xup -O2 -shared -fPIC %~other -o "%o" %objs'
+					OtherOptions="-m32"/>
+			</Target>
+			<Target
+				Name="Build"
+				MenuCaption="&amp;Build"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='gmake -f "Makefile.mac" CFG=%b'/>
+			</Target>
+			<Target
+				Name="Rebuild"
+				MenuCaption="&amp;Rebuild"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='gmake -f "Makefile.mac" rebuild CFG=%b'/>
+			</Target>
+			<Target
+				Name="Debug"
+				MenuCaption="&amp;Debug"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveNone"
+				RunFromDir="%rw"
+				ClearProcessBuffer="1">
+				<Exec CmdLine='"%o" "%o"'/>
+			</Target>
+			<Target
+				Name="Execute"
+				MenuCaption="E&amp;xecute"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%o"'/>
+			</Target>
+			<Target
+				Name="dash"
+				MenuCaption="-"
+				Deletable="0">
+				<Exec/>
+			</Target>
+			<Target
+				Name="GNU C Options"
+				MenuCaption="GNU C &amp;Options..."
+				ShowOnMenu="HideIfNoCmdLine"
+				Deletable="0"
+				SaveOption="SaveNone">
+				<Exec
+					CmdLine="gnucoptions"
+					Type="Slick-C"/>
+			</Target>
+		</Menu>
+		<Includes/>
+		<Libs PreObjects="0">
+			<Lib File="-lpthread"/>
+			<Lib File="-liconv"/>
+			<Lib File="-lLog"/>
+			<Lib File="-L/usr/local/lib"/>
+		</Libs>
+		<PostBuildCommands>
+			<Exec CmdLine="cp ./Debug/libcomutility.so /usr/local/lib"/>
+		</PostBuildCommands>
+	</Config>
+	<CustomFolders>
+		<Folder
+			Name="Source Files"
+			Filters="*.c;*.C;*.cc;*.cpp;*.cp;*.cxx;*.c++;*.prg;*.pas;*.dpr;*.asm;*.s;*.bas;*.java;*.cs;*.sc;*.e;*.cob;*.html;*.rc;*.tcl;*.py;*.pl;*.d">
+		</Folder>
+		<Folder
+			Name="Header Files"
+			Filters="*.h;*.H;*.hh;*.hpp;*.hxx;*.inc;*.sh;*.cpy;*.if">
+		</Folder>
+		<Folder
+			Name="Resource Files"
+			Filters="*.ico;*.cur;*.dlg"/>
+		<Folder
+			Name="Bitmaps"
+			Filters="*.bmp"/>
+		<Folder
+			Name="Other Files"
+			Filters="">
+		</Folder>
+	</CustomFolders>
+	<Files AutoFolders="DirectoryView">
+		<F N="ARCCORE.cpp"/>
+		<F N="ARCCORE.h"/>
+		<F N="c_socket.cpp"/>
+		<F N="c_socket.h"/>
+		<F N="c_wait_for.cpp"/>
+		<F N="c_wait_for.h"/>
+		<F N="CArray.h"/>
+		<F N="cfgcmd.h"/>
+		<F N="COMM_MSG_DEF.h"/>
+		<F N="Config.cpp"/>
+		<F N="Config.h"/>
+		<F N="CPtrArray.h"/>
+		<F N="dblinklist.h"/>
+		<F N="DIFS_CFG.H"/>
+		<F N="difsdiskcmd.h"/>
+		<F N="difsdiskext.h"/>
+		<F N="difstypes.h"/>
+		<F N="DiMBBase.h"/>
+		<F N="diskDataS.h"/>
+		<F N="FileCore.cpp"/>
+		<F N="FiMemMgrTool.cpp"/>
+		<F N="FiMemMgrTool.h"/>
+		<F N="FiMsgThread.cpp"/>
+		<F N="FiMsgThread.h"/>
+		<F N="FiUtility.cpp"/>
+		<F N="FiUtility.h"/>
+		<F N="GetIP.cpp"/>
+		<F N="GetIP.h"/>
+		<F N="log.cpp"/>
+		<F N="log.h"/>
+		<F
+			N="Makefile.mac"
+			Type="Makefile.mac"/>
+		<F N="Markup.cpp"/>
+		<F N="Markup.h"/>
+		<F N="MemFile.cpp"/>
+		<F N="metacmdbase.h"/>
+		<F N="metacmddifs.h"/>
+		<F N="MfcTime.cpp"/>
+		<F N="MfcTime.h"/>
+		<F N="MfcWrapper.h"/>
+		<F N="nixdef.h"/>
+		<F N="pipetransfer.cpp"/>
+		<F N="pipetransfer.h"/>
+		<F N="ProcessMsg.cpp"/>
+		<F N="ProcessMsg.h"/>
+		<F N="RiffFile.cpp"/>
+		<F N="RiffFile.h"/>
+		<F N="SDAMSMsgConvertor.cpp"/>
+		<F N="SDAMSMsgConvertor.h"/>
+		<F N="ShareLock.cpp"/>
+		<F N="ShareLock.h"/>
+		<F N="StdString.h"/>
+		<F N="sv_ipc.h"/>
+		<F N="sv_sem.cpp"/>
+		<F N="sv_shm.cpp"/>
+		<F N="TCHAR.h"/>
+		<F N="TCPSocket.cpp"/>
+		<F N="TCPSocket.h"/>
+		<F N="UDPSocket.cpp"/>
+		<F N="UDPSocket.h"/>
+		<F N="UDPSocketThread.cpp"/>
+		<F N="UDPSocketThread.h"/>
+		<F N="W2KWrapBase.h"/>
+		<F N="WIN_SOCKET_DEF.cpp"/>
+		<F N="WIN_SOCKET_DEF.h"/>
+		<F N="winerror.h"/>
+	</Files>
+</Project>
