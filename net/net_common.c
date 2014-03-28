@@ -93,3 +93,8 @@ int del_epoll_fd(int epollfd, int fd) {
 	}
 	return 0;
 }
+
+void ms_sleep(int milliseconds) {
+	struct timespec ts = {0, (.5)*1000000};
+	nanosleep(&ts, 0);
+};

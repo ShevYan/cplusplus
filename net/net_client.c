@@ -25,7 +25,7 @@ static void* _epoll_thread(void *cxt) {
 
 	assert(clt);
 	epollfd = epoll_create(10);
-	ev.events = EPOLLIN | EPOLLET;
+	ev.events = EPOLLIN;
 	ev.data.fd = clt->sock;
 
 	if (epoll_ctl(epollfd, EPOLL_CTL_ADD, clt->sock, &ev) == -1) {
@@ -37,7 +37,7 @@ static void* _epoll_thread(void *cxt) {
 
 		nfds = epoll_wait(epollfd, events, 10, -1);
 		if (nfds == -1) {
-			perror("epoll_pwait");
+			//perror("epoll_pwait");
 			continue;
 		}
 
@@ -182,7 +182,7 @@ int client_init(client_t *clt, char *clt_svr_ip, int clt_svr_port,
 	clt->reconn_thread.t_cxt = clt;
 	clt->reconn_thread.t_fun = _reconn_thread;
 
-	clt->work_threads = create_work_thread_pool(1, false, clt);
+	clt->work_threads = create_work_thread_pool(5, false, clt);
 
 	return 0;
 }
@@ -231,4 +231,36 @@ int client_send(client_t *clt, char *buf, int len) {
 	stream = NULL;
 
 	return res;
+}
+
+int client_async_send(client_t *clt, char *buf, int len, send_completion *cbfn, void *cbdata) {
+	int res = 0;
+	int sock = 0;
+	msg_t *msg = NULL;
+	char *stream = NULL;
+	int stream_len = 0;
+	assert(buf);
+
+	pthread_mutex_lock(&clt->clt_lock);
+	if (clt->session) {
+		sock = clt->session->socket;
+	}
+	pthread_mutex_unlock(&clt->clt_lock);
+
+	if (0 == sock) {
+		return -1;
+	}
+
+	msg = malloc_msg(buf, len);
+	encode(msg, &stream, &stream_len);
+	msg->msg_type = MSG_TYPE_ASYNC_SEND;
+	msg->cbfn = cbfn;
+	msg->cbdata = cbdata;
+	msg->sock = sock;
+	msg->stream = stream;
+	msg->stream_len = stream_len;
+
+	push_msg(clt->work_threads, msg);
+
+	return 0;
 }

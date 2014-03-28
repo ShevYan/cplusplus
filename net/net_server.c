@@ -64,7 +64,7 @@ int server_start(server_t *svr) {
 		return -errno;
 	}
 
-	ev.events = EPOLLIN | EPOLLET;
+	ev.events = EPOLLIN;
 	ev.data.fd = listen_sock;
 	if (epoll_ctl(epollfd, EPOLL_CTL_ADD, listen_sock, &ev) == -1) {
 		perror("epoll_ctl: listen_sock");
@@ -128,6 +128,49 @@ int server_send(server_t *svr, const char *ip, char *buf, int len) {
 
 }
 
+int server_async_send(server_t *svr, const char *ip, char *buf, int len,
+		send_completion *cbfn, void *cbdata) {
+	int res = -1;
+	struct list_head *p = NULL;
+	int sock = 0;
+	msg_t *msg = NULL;
+	char *stream = NULL;
+	int stream_len = 0;
+	assert(buf);
+
+	pthread_mutex_lock(&svr->svr_lock);
+
+	/* find a socket*/
+	for (p=svr->svr_sessions.next; p!=&svr->svr_sessions; p=p->next) {
+		session_t *ses = (session_t *)p;
+		assert(ses);
+
+		if (0 == strcmp(ses->remote_ip, ip)) {
+			sock = ses->socket;
+			break;
+		}
+	}
+	pthread_mutex_unlock(&svr->svr_lock);
+
+	if (0 == sock) {
+		return -1;
+	}
+
+	msg = malloc_msg(buf, len);
+	encode(msg, &stream, &stream_len);
+	msg->msg_type = MSG_TYPE_ASYNC_SEND;
+	msg->cbfn = cbfn;
+	msg->cbdata = cbdata;
+	msg->sock = sock;
+	msg->stream = stream;
+	msg->stream_len = stream_len;
+
+	push_msg(svr->work_threads, msg);
+
+	return 0;
+
+}
+
 int add_session(server_t *svr, int epollfd, int conn_sock,
 		const char *client_ip, int client_port) {
 	struct epoll_event ev;
@@ -180,7 +223,7 @@ static void* _epoll_thread(void *cxt) {
 	for (;;) {
 		nfds = epoll_wait(svr->svr_epollfd, events, MAX_EVENTS, -1);
 		if (nfds == -1) {
-			perror("epoll_pwait");
+			//perror("epoll_pwait");
 			continue;
 		}
 
@@ -286,7 +329,7 @@ int server_init(server_t *svr, int port,
 	svr->thread.t_cxt = svr;
 	svr->thread.t_fun = _epoll_thread;
 
-	svr->work_threads = create_work_thread_pool(1, true, svr);
+	svr->work_threads = create_work_thread_pool(5, true, svr);
 	pthread_mutex_unlock(&svr->svr_lock);
 	return 0;
 }

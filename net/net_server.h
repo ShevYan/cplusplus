@@ -9,6 +9,7 @@
 #define NET_SERVER_H_
 #include "net_global.h"
 #include "net_work_thread.h"
+#include "net_common.h"
 
 typedef struct _server {
 	thread_t thread;
@@ -49,5 +50,8 @@ int server_start(server_t *svr);
 int server_stop(server_t *svr);
 int server_join(server_t *svr);
 int server_send(server_t *svr, const char *ip, char *buf, int len);
+
+int server_async_send(server_t *svr, const char *ip, char *buf, int len,
+		send_completion *cbfn, void *cbdata);
 
 #endif /* NET_SERVER_H_ */

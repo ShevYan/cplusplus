@@ -15,4 +15,7 @@ void set_sock_opts(int sock);
 void setnonblocking(int Sock);
 int del_epoll_fd(int epollfd, int fd);
 
+
+typedef void (*send_completion)(int ret, void *cbdata);
+void ms_sleep(int milliseconds);
 #endif /* NET_COMMON_H_ */

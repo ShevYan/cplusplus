@@ -14,11 +14,13 @@
 #include "net_session.h"
 #include "net_msg.h"
 
+#define MAX_WORK_ITEM_SIZE 65536
 typedef struct _work_thread {
 	thread_t thread;
 	struct list_head head;
 	pthread_mutex_t lock;
 	sem_t sem;
+	int item_count;
 	bool is_idle;
 	bool is_server;
 	void* svr_or_clt;

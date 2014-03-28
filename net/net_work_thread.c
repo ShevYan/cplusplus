@@ -27,41 +27,65 @@ static void* _net_work_thread_fun(void *cxt) {
 		assert(msg);
 		list_del(work_thread->head.next);
 		work_thread->is_idle = true;
+		work_thread->item_count --;
 		pthread_mutex_unlock(&work_thread->lock);
 
-		if (work_thread->is_server) {
-			server_t *svr = (server_t *)work_thread->svr_or_clt;
-			svr->svr_cb_recv(svr->svr_cb_recv_cxt, msg->buf, msg->msglen);
-		} else {
-			client_t *clt = (client_t *)work_thread->svr_or_clt;
-			clt->clt_cb_recv(clt->clt_cb_recv_cxt, msg->buf, msg->msglen);
-		}
+		if (msg->msg_type == MSG_TYPE_ASYNC_SEND) {
+			int res = -1;
+			assert(msg->stream);
 
-		free(msg->buf);
-		msg->buf = NULL;
-		free_msg(&msg);
+			res = write(msg->sock, msg->stream, msg->stream_len);
+			if (msg->cbfn) {
+				((send_completion)msg->cbfn)(res, msg->cbdata);
+			}
+
+			free(msg->stream);
+			msg->stream = NULL;
+			msg->buf = NULL;
+			free_msg(&msg);
+			msg = NULL;
+		} else {
+			if (work_thread->is_server) {
+				server_t *svr = (server_t *)work_thread->svr_or_clt;
+				svr->svr_cb_recv(svr->svr_cb_recv_cxt, msg->buf, msg->msglen);
+			} else {
+				client_t *clt = (client_t *)work_thread->svr_or_clt;
+				clt->clt_cb_recv(clt->clt_cb_recv_cxt, msg->buf, msg->msglen);
+			}
+
+			free(msg->buf);
+			msg->buf = NULL;
+			free_msg(&msg);
+			msg = NULL;
+		}
 	}
 
 	return NULL;
 }
 
 work_thread_t* select_thread(work_thread_pool_t *pool) {
+	int min = 0x7fffffff;
 	int i = 0;
 	for (i=0; i<pool->num; i++) {
-		if (pool->work_threads[i].is_idle) {
-			return pool->work_threads + i;
+		if (pool->work_threads[i].item_count < min) {
+			min = i;
 		}
 	}
 
-	return pool->work_threads + 0;
+	return pool->work_threads + min;
 }
 
 int push_msg(work_thread_pool_t *pool, msg_t *m) {
 	work_thread_t *thread = select_thread(pool);
 
+	while (thread->item_count > MAX_WORK_ITEM_SIZE) {
+		ms_sleep(5);
+	}
+
 	pthread_mutex_lock(&thread->lock);
 	list_add_tail(&m->acr, &thread->head);
 	sem_post(&thread->sem);
+	thread->item_count ++;
 	pthread_mutex_unlock(&thread->lock);
 
 	return 0;
@@ -72,11 +96,13 @@ work_thread_pool_t* create_work_thread_pool(int num, bool is_server, void* svr_o
 	work_thread_pool_t *res = (work_thread_pool_t *)malloc(sizeof(work_thread_pool_t));
 	assert(res);
 
+	memset(res, 0x00, sizeof(work_thread_pool_t));
 	res->num = num;
 	res->is_server = is_server;
 	res->svr_or_clt = svr_or_clt;
 	res->work_threads = (work_thread_t *)malloc(num * sizeof(work_thread_t));
 	assert(res->work_threads);
+	memset(res->work_threads, 0x00, num * sizeof(work_thread_t));
 
 	/* init threads*/
 	for (i=0; i<num; i++) {

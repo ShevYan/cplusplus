@@ -9,6 +9,7 @@
 #define NET_CLIENT_H_
 #include "net_global.h"
 #include "net_work_thread.h"
+#include "net_common.h"
 
 typedef struct _client {
 	thread_t epoll_thread;
@@ -53,6 +54,7 @@ int client_start(client_t *clt);
 int client_stop(client_t *clt);
 int client_join(client_t *clt);
 int client_send(client_t *clt, char *buf, int len);
+int client_async_send(client_t *clt, char *buf, int len, send_completion *cb, void *cbdata);
 
 
 #endif /* NET_CLIENT_H_ */

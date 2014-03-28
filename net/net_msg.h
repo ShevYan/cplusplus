@@ -9,8 +9,17 @@
 #define NET_MSG_H_
 #include "list.h"
 
+#define MSG_TYPE_ASYNC_SEND 2
+
 typedef struct _msg {
 	struct list_head acr;
+	int msg_type;
+	void *cbfn;
+	void *cbdata;
+	int sock;
+	char *stream;
+	int stream_len;
+
 	int msgid;
 	int msglen;
 	int crc;
