@@ -1,3 +1,4 @@
+.meta*
 *.o
 *.d
 *recv.dat

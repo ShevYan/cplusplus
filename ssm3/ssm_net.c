@@ -21,6 +21,7 @@
 
 void* _ssm_svr_connect(void *cxt, const char* host, int port) {
 	printf("server: %s:%d connected.\n", host, port);
+	fflush(stdout);
 	server_t *svr = (server_t *)cxt;
 	assert(svr);
 
@@ -33,7 +34,7 @@ void* _ssm_svr_connect(void *cxt, const char* host, int port) {
 
 void* _ssm_svr_disconnect(void *cxt, const char* host, int port) {
 	printf("server: %s:%d disconnected.\n", host, port);
-
+	fflush(stdout);
 	return NULL;
 }
 
@@ -75,16 +76,6 @@ void resp_charon_io(server_t *svr, int is_read, int len, char *io_cxt) {
 	printf("%s", io_cxt);
 	printf("=====resp_charon_io end=====\n");
 
-//	//TEST: read from file
-//	fd = open("ssm_out.txt", O_RDONLY);
-//	assert(fd > 0);
-//
-//	res = fstat(fd, &st);
-//	assert(res == 0);
-//	io_resp = (resp_charon_io_t *)malloc(sizeof(resp_charon_io_t) + st.st_size - 1);
-//	read(fd, io_resp->io_cxt, st.st_size);
-//	close(fd);
-
 	io_resp = (resp_charon_io_t *)malloc(sizeof(resp_charon_io_t) + len - 1);
 	memset(io_resp, 0x00, sizeof(resp_charon_io_t) + len - 1);
 	io_resp->msgtype = MSG_TYPE_RESP_CHARON_IO;
@@ -104,11 +95,11 @@ void resp_read_segment(server_t *svr, req_read_segment_t *seg_req) {
 	long off = 0L;
 	resp_read_segment_t *seg_resp = NULL;
 
-	printf("req_read_segment: %d %s %ld %ld\n",
-			seg_req->msgtype,
-			seg_req->diskname,
-			seg_req->offset,
-			seg_req->len);
+//	printf("req_read_segment: %d %s %ld %ld\n",
+//			seg_req->msgtype,
+//			seg_req->diskname,
+//			seg_req->offset,
+//			seg_req->len);
 
 	seg_resp = (resp_read_segment_t *)malloc(sizeof(resp_read_segment_t) + seg_req->len - 1);
 	memset(seg_resp, 0x00, sizeof(resp_read_segment_t) + seg_req->len - 1);
@@ -147,7 +138,7 @@ void* _ssm_svr_recv(void *cxt, char *buf, int len) {
 	int msgtype = htobe32(*(int *)buf);
 	server_t *svr = (server_t *)cxt;
 
-	printf("server: recv msg [%d]\n", len);
+	//printf("server: recv msg [%d]\n", len);
 
 	switch (msgtype) {
 	case MSG_TYPE_REQ_LARGE_BLOCK:
@@ -256,6 +247,10 @@ int ssm_net_init() {
 	//ssm_svr = NULL;
 
 
+}
+
+int ssm_net_uninit() {
+	return 0;
 }
 
 int ssm_net_client_init() {

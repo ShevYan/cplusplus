@@ -1,0 +1,85 @@
+data buffer BEFORE Encoding: buffs 8 x 6291456:
+
+ 31 31 31 31 31 31 31 31  0  0
+ 31 31 31 31 31 31 31 31  0  0
+ 31 31 31 31 31 31 31 31  0  0
+ 31 31 31 31 31 31 31 31  0  0
+ 31 31 31 31 31 31 31 31  0  0
+ 31 31 31 31 31 31 31 31  0  0
+ 31 31 31 31 31 31 31 31  0  0
+ 31 31 31 31 31 31 31 31  0  0
+ 31 31 31 31 31 31 31 31  0  0
+ 31 31 31 31 31 31 31 31  0  0
+ 31 31 31 31 31 31 31 31  0  0
+ 31 31 31 31 31 31 31 31  0  0
+ 31 31 31 31 31 31 31 31  0  0
+ 31 31 31 31 31 31 31 31  0  0
+ 31 31 31 31 31 31 31 31  0  0
+ 31 31 31 31 31 31 31 31  0  0
+ 31 31 31 31 31 31 31 31  0  0
+ 31 31 31 31 31 31 31 31  0  0
+ 31 31 31 31 31 31 31 31  0  0
+ 31 31 31 31 31 31 31 31  0  0
+ 31 31 31 31 31 31 31 31  0  0
+ 31 31 31 31 31 31 31 31  0  0
+ 31 31 31 31 31 31 31 31  0  0
+ 31 31 31 31 31 31 31 31  0  0
+ 31 31 31 31 31 31 31 31  0  0
+
+
+data buffer AFTER Encoding: buffs 8 x 4194304:
+
+ 31 31 31 31 31 31 31 31  0 22
+ 31 31 31 31 31 31 31 31  0 22
+ 31 31 31 31 31 31 31 31  0 22
+ 31 31 31 31 31 31 31 31  0 22
+ 31 31 31 31 31 31 31 31  0 22
+ 31 31 31 31 31 31 31 31  0 22
+ 31 31 31 31 31 31 31 31  0 22
+ 31 31 31 31 31 31 31 31  0 22
+ 31 31 31 31 31 31 31 31  0 22
+ 31 31 31 31 31 31 31 31  0 22
+ 31 31 31 31 31 31 31 31  0 22
+ 31 31 31 31 31 31 31 31  0 22
+ 31 31 31 31 31 31 31 31  0 22
+ 31 31 31 31 31 31 31 31  0 22
+ 31 31 31 31 31 31 31 31  0 22
+ 31 31 31 31 31 31 31 31  0 22
+ 31 31 31 31 31 31 31 31  0 22
+ 31 31 31 31 31 31 31 31  0 22
+ 31 31 31 31 31 31 31 31  0 22
+ 31 31 31 31 31 31 31 31  0 22
+ 31 31 31 31 31 31 31 31  0 22
+ 31 31 31 31 31 31 31 31  0 22
+ 31 31 31 31 31 31 31 31  0 22
+ 31 31 31 31 31 31 31 31  0 22
+ 31 31 31 31 31 31 31 31  0 22
+
+dumping col 0 to file d_0.col0...
+dumping col 1 to file d_0.col1...
+dumping col 2 to file d_0.col2...
+dumping col 3 to file d_0.col3...
+dumping col 4 to file d_0.col4...
+dumping col 5 to file d_0.col5...
+dumping col 6 to file d_0.col6...
+dumping col 7 to file d_0.col7...
+dumping col p to file p_0.out...
+dumping col q to file q_0.out...
+
+dumping bitmap(BEFORE I/O: 952320 bits) to file bmap_0.before...
+
+I/O on container: {8576ee66-b947-11e3-8b91-06533f38297e}
+           Owner: FFFFFFFFB60A2609
+
+col 0: FFFFFFFFB60A2609: dm-13: 0 offset: 0 length: 4194304
+col 1: FFFFFFFFB60A2609: dm-40: 0 offset: 0 length: 4194304
+col 2: FFFFFFFFB60A2609: dm-52: 0 offset: 0 length: 4194304
+col 3: FFFFFFFFB60A2609: dm-16: 0 offset: 0 length: 4194304
+col 4: FFFFFFFFB60A2609: dm-62: 0 offset: 0 length: 4194304
+col 5: FFFFFFFFB60A2609: dm-41: 0 offset: 0 length: 4194304
+col 6: FFFFFFFFB60A2609: dm-16: 1 offset: 998579896320 length: 4194304
+col 7: FFFFFFFFB60A2609: dm-43: 0 offset: 0 length: 4194304
+col 8: FFFFFFFFB60A2609: dm-45: 0 offset: 0 length: 4194304
+col 9: FFFFFFFFB60A2609: dm-49: 0 offset: 0 length: 4194304
+
+dumping bitmap(AFTER I/O: 952320 bits) to file bmap_0.after...";

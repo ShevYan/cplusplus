@@ -1,0 +1,22 @@
+CC = gcc
+LD = gcc
+INCLUDES =
+CFLAGS = -Wall -g
+LIBS = -ludev
+
+SRC = udev_disk.c
+OBJ =$(SRC:.c=.o)
+TARGET = $(basename $(SRC))
+
+# all: $(TARGET)
+
+.SUFFIXES: .c .o
+
+.c.o:
+	$(CC) $(CFLAGS) $(INCLUDES) -c $<
+
+$(TARGET): $(OBJ)
+	${LD} -o $@ $< ${LIBS}
+
+clean:
+	rm -f $(OBJ) $(TARGET)

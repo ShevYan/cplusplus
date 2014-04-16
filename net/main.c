@@ -18,7 +18,10 @@
 
 void* _cb_svr_connect(void *cxt, const char* host, int port) {
 	printf("server: %s:%d connected.\n", host, port);
+	server_t *svr = (server_t *)cxt;
+	assert(svr);
 
+	server_send(svr, host, "abcd", 5);
 	return NULL;
 }
 
@@ -82,7 +85,7 @@ void* _cb_clt_recv(void *cxt, char *buf, int len) {
 void usage() {
 	fprintf(stderr, "usage: \n");
 	fprintf(stderr, "      net -s                     #start a server\n");
-	fprintf(stderr, "      net -c <absolute_filepath> #start a client to transfer a file\n");
+	fprintf(stderr, "      net -c <filepath>          #start a client to transfer a file\n");
 	exit(-1);
 }
 
@@ -139,7 +142,7 @@ int main(int argc, char *argv[]) {
 		datablockp->size = st.st_size;
 		while (datablockp->offset < datablockp->size) {
 			datablockp->block_size = BLOCK_SIZE;
-			int read_bytes = datablockp->block_size;//read(fd, datablockp->block, datablockp->block_size);
+			int read_bytes = read(fd, datablockp->block, datablockp->block_size);
 			if (read_bytes < datablockp->block_size) {
 				datablockp->block_size = read_bytes;
 			}

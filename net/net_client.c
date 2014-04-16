@@ -55,7 +55,7 @@ static void* _epoll_thread(void *cxt) {
 					printf("read err[%d]\n", -errno);
 				}
 
-				if (-1 == len || first_read && 0 == len) {
+				if (-1 == len || (first_read && 0 == len) ) {
 					/* disconnected: call user defined call back */
 					if (clt->clt_cb_disconn) {
 						clt->clt_cb_disconn(clt->clt_cb_disconn_cxt,

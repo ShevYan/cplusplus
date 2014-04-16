@@ -1,0 +1,55 @@
+OOS code style:
+	This guide is used to keep the project style. Before go head, please refer to 
+http://google-styleguide.googlecode.com/svn/trunk/cppguide.xml. However, we have some differences as below:
+1. Our style is simpler.
+2. Project type - use Eclipse Kepler + CDT as the IDE.
+3. Header files:
+	1) use #define to avoid mutiple inclusion.
+	2) order of includes are same as google.
+4. Scoping
+	1) avoid self-defined namespace as possible.
+	2) avoid static and global variables and functions as possible.
+	3) avoid nested classes
+5. Classes
+	1) do the trivial things only in constructors.
+	2) initialize every parameters in constructors, delegating is preferred.
+	3) explicit constructors.
+	4) avoid copy constructors and must explicitly declare not to use it.
+	5) avoid operator overloading.
+	6) avoid multiple-inheritance from class. Implementation of multiple interfaces are allowed.
+	7) structs only contains data and pointers. Others are all classes.
+	8) write short functions. Separate a function if it contains more than a screen-height lines.
+6. Other C++ features
+	1) use 'const' to constrain read-only reference arguments.
+	2) avoid default arguments.
+	3) avoid using exceptions.
+	4) Use C-style casting.
+	5) Only support 64-bit.
+	6) use the default integer type - avoid to set the type size, use the system defined type.
+	7) sizeof(struct_or_type) as possible.
+	8) use proven and stable library as possible.
+7. Naming
+	1) File Names - all lowwer case with underscores separated, and suffixed with *.h/*.cpp.
+	2) Type Names
+		a. start with a capital letter.
+		b. variables are all prefixed with its type. 
+			eg: int - nIntParam, long - lLongParam, pointer - *pOnePtr, bool - bIsOK, char - cCh,
+				string  - strName, vector - vctParm, list - listOne, stack - stackTwo.
+		c. enum, Macro are all of uppercase.
+8. Fomatting
+	1) line length - default setting of eclipse.
+	2) use UTF-8 encoding.
+	3) use tabs as indentation.
+9. Programming 
+	0) keep defensive coding style in mind. Keep in mind that failure is normalcy.
+	1) asserting
+		a. use assert as much as possible.
+		b. wrap assert for release version.
+	2) avoid multiple places of returning as possible, especially in multple-thread programing.
+	3) arguments check need to be done at beginning of every function.
+	4) do check each system call's return value.
+	5) keep debugable programming in mind.
+	6) output log using different severities.
+	7) write unit test case for every class.
+	
+	

@@ -16,13 +16,18 @@ char		sysfs_path[FILE_NAME_SIZE];
 
 #ifdef	GRACE_DEMO1_03_14
 
-int usr_interrupt;
+int usr_interrupt = 0;
+int usr_terminate = 0;
+char   arg_file[]="/tmp/passing.arg";
+
 
 void
 sig_handler(int signo)
 {
 	if (signo == SIGUSR1) {
 		usr_interrupt = 1;
+	} else if(signo == SIGUSR2) {
+		usr_terminate = 1;
 	} else if (signo == SIGPIPE) {
 		fprintf(stderr, "ignore sigpipe\n");
 	}
@@ -31,10 +36,10 @@ sig_handler(int signo)
 void
 test_wait_for_signal()
 {
-	fprintf(stdout, "\nwait for SIGUSR1 signal ...\n");
-
+//	fprintf(stdout, "\nwait for USER INPUT or TERMINATION signal ...\n");
+//	fflush(stdout);
 #ifdef	WAIT_FOR_SIGNAL
-	while (!usr_interrupt) {
+	while (!usr_interrupt && !usr_terminate) {
 		sleep(1);
 	}
 #endif
@@ -153,6 +158,36 @@ err_out:
 }
 
 #ifdef	GRACE_DEMO1_03_14
+int
+test_read_arguments(char *datafile, int *ctnID)
+{
+	char    line [FILE_NAME_SIZE];
+	FILE    *fd;
+
+	fd = fopen(arg_file, "r");
+	if (fd == NULL) {
+		fprintf(stderr, "Failed to open %s.\n", arg_file);
+		return 1;
+	}
+
+	if (fgets(line, sizeof(line), fd) != NULL) {
+		sscanf(line, "%s", datafile);
+		fprintf(stdout, "test_datafile: %s\n", datafile);
+	}
+
+	if (fgets(line, sizeof(line), fd) != NULL) {
+		sscanf(line, "%d", ctnID);
+		fprintf(stdout, "test container ID: %d\n", *ctnID);
+	} else {
+		*ctnID = -1;
+		fprintf(stdout, "test container ID is not specifed\n");
+	}
+
+	fclose(fd);
+
+	return 0;
+}
+
 ssm_io_t *
 test_read_io_from_file(char *filename)
 {
@@ -308,24 +343,16 @@ main(int argc, char *argv[])
 	int		ret = -1;
 	char 	*net_io_cxt = (char *)malloc(128<<10);
 	ssm_io_t	*io;
+	char            datafile[FILE_NAME_SIZE];
+	int             ctnID = -1, seqno = 0;
 	int 	count = 0;
-
-
-	/* for charoncp*/
-	if (argc > 1) {
-		if (argc != 3) {
-			client_usage();
-		} else {
-			ssm_net_client_init();
-			ssm_charoncp(argv[1], argv[2]);
-			exit(0);
-		}
-	}
 
 	/* for server*/
 //	ssm_net_init();
 //	server_join(ssm_svr);
 	///////////////////////////////////////////////////////////
+
+
 
 	ret = ssm_config_dir();
 	if (ret != 0) {
@@ -360,64 +387,61 @@ main(int argc, char *argv[])
 	fprintf(stdout, "\nInitialization Complete.\n\n");
 
 #ifdef	GRACE_DEMO1_03_14
-
+	unlink(arg_file);
 	if (signal(SIGUSR1, sig_handler) == SIG_ERR) {
 		fprintf(stderr, "Can't catch SIGUSR1.\n");
 		ret = 1;
 		goto out;
 	}
 
+	if (signal(SIGUSR2, sig_handler) == SIG_ERR) {
+		fprintf(stderr, "Can't catch SIGUSR2.\n");
+		ret = 1;
+		goto out;
+	}
 //	if (signal(SIGPIPE, sig_handler) == SIG_ERR) {
 //		fprintf(stderr, "Can't catch SIGPIPE.\n");
 //		ret = 1;
 //		goto out;
 //	}
 
-	ssm_net_init();
+
 
 	ssm_dump_container("./container.map", &ssm_ctn_tbl);
 
 	fflush(stdout);
 
+	ret = ssm_net_init();
+	if (ret != 0) {
+		fprintf(stderr, "Can't start server.\n");
+		goto out;
+	}
 
-	while (true) {
+	while (1) {
 		test_wait_for_signal();
-		io = test_read_io_from_file(g_srcfile);
+
+		if (usr_terminate) {
+			break;
+		}
+
+		ret = test_read_arguments(datafile, &ctnID);
+		if (ret) {
+			fprintf(stderr, "Can't open datafile %s.\n", datafile);
+			goto out;
+		}
+
+		io = test_read_io_from_file(datafile);
 		if (!io) {
 			ret = EIO;
 			goto out;
 		}
 		memset(net_io_cxt, 0x00, 64<<10);
-		ret = test_ssm_io(count ? 5 : -1, io, 0, net_io_cxt);
+		ret = test_ssm_io(ctnID, io, seqno, net_io_cxt);
 		resp_charon_io(ssm_svr, false, strlen(net_io_cxt)+1, net_io_cxt);
+		seqno++;
+
 		fflush(stdout);
-
-		count ++;
 	}
-
-//	test_wait_for_signal();
-//
-//	io = test_read_io_from_file(g_srcfile);
-//	if (!io) {
-//		ret = EIO;
-//		goto out;
-//	}
-//
-//	memset(net_io_cxt, 0x00, 64<<10);
-//	ret = test_ssm_io(5, io, 1, net_io_cxt);
-//	resp_charon_io(ssm_svr, false, strlen(net_io_cxt)+1, net_io_cxt);
-//	fflush(stdout);
-//	test_wait_for_signal();
-//
-//	io = test_read_io_from_file(g_srcfile);
-//	if (!io) {
-//		ret = EIO;
-//		goto out;
-//	}
-//	memset(net_io_cxt, 0x00, 64<<10);
-//	ret = test_ssm_io(5, io, 2, net_io_cxt);
-//	resp_charon_io(ssm_svr, false, strlen(net_io_cxt)+1, net_io_cxt);
-//	fflush(stdout);
 
 #else
 	io = test_generate_io(1);
@@ -431,7 +455,5 @@ main(int argc, char *argv[])
 #endif
 
 out:
-	printf("Press any key to exit...\n");
-	getchar();
 	return ret;
 }

@@ -269,7 +269,7 @@ static void* _epoll_thread(void *cxt) {
 							printf("read err[%d]\n", -errno);
 						}
 
-						if (-1 == len || first_read && len == 0) {
+						if (-1 == len || (first_read && len == 0) ) {
 							/* disconnected: call user defined call back */
 							if (svr->svr_cb_disconn) {
 								svr->svr_cb_disconn(svr->svr_cb_disconn_cxt,

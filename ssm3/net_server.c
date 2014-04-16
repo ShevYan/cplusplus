@@ -32,12 +32,14 @@ int server_start(server_t *svr) {
 	int addrlen = sizeof(struct sockaddr_in);
 	int sock_flag = 0;
 	assert(svr);
+	int nREUSEADDR = 1;
 
 	listen_sock = socket(AF_INET, SOCK_STREAM, 0);
 	if (-1 == listen_sock) {
 		perror("socket");
 		return -errno;
 	}
+	setsockopt(listen_sock, SOL_SOCKET, SO_REUSEADDR, &nREUSEADDR, sizeof(int));
 
 	memset(&s_add, 0x00, sizeof(struct sockaddr_in));
 	s_add.sin_family = AF_INET;
